@@ -1,5 +1,11 @@
 <div class="row">
     <div class="col-md-12 text-center">
         <h1>Classements</h1>
+        <?php if ($this->events) { ?>
+            <?php
+            /** @var \Application\Entity\User $participant */
+            foreach ($this->events as $event) { ?>
+                <li><a href="/classement/<?= $event->getId() ?>"><?= $event->getName() ?></a></li>
+        <?php }} ?>
     </div>
 </div>

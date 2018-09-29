@@ -11,7 +11,7 @@ return [
     'router' => [
         'routes' => [
             'classement' => [
-                'type' => Segment::class,
+                'type' => Literal::class,
                 'options' => [
                     'route'    => '/classement',
                     'defaults' => [
@@ -19,6 +19,19 @@ return [
                         'action'     => 'index',
                     ],
                 ],
+                'may_terminate' => true,
+                'child_routes'  => array(
+                    'event'   =>  array(
+                        'type'    => Segment::class,
+                        'options'   =>  array(
+                            'route' =>  '[/:event-id][/:sex]',
+                            'defaults'  =>  array(
+                                'controller' => Controller\ClassementController::class,
+                                'action'    =>  'event'
+                            )
+                        )
+                    ),
+                )
             ]
         ],
     ],

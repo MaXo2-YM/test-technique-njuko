@@ -1,0 +1,70 @@
+<?php if($this->event) { ?>
+<div class="row">
+    <div class="col-md-12 text-center">
+        <h1>Classements de la course "<?= $this->event->getName() ?>"</h1>
+    </div>
+</div>
+<div class="row mt-20">
+    <div class="col-md-12 text-center">
+        Classement :
+        <?php if ($this->sex) { ?>
+            <a href="<?= $this->url('classement/event', ['event-id' => $this->event->getId(), 'sex' => null]) ?>">Général</a>
+        <?php } else { ?>
+            <b>Général</b>
+        <?php } ?> |
+        <?php if ($this->sex != "male") { ?>
+            <a href="<?= $this->url('classement/event', ['event-id' => $this->event->getId(), 'sex' => 'male']) ?>">Hommes</a>
+        <?php } else { ?>
+            <b>Hommes</b>
+        <?php } ?> |
+        <?php if ($this->sex != "female") { ?>
+            <a href="<?= $this->url('classement/event', ['event-id' => $this->event->getId(), 'sex' => 'female']) ?>">Femmes</a>
+        <?php } else { ?>
+            <b>Femmes</b>
+        <?php } ?>
+    </div>
+    <div class="table-responsive mt-20">
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>#</td>
+                    <td>Nom</td>
+                    <td>Prénom</td>
+                    <td>Sexe</td>
+                    <td>Dossard</td>
+                    <td>Temps de course</td>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if ($this->participants) { ?>
+                    <?php
+                    /** @var \Application\Entity\User $participant */
+                    foreach ($this->participants as $participant) {
+                        ?>
+                        <tr>
+                            <td><?=$participant->getId()?></td>
+                            <td><?=$participant->getFirstname()?></td>
+                            <td><?=$participant->getLastname()?></td>
+                            <td><?php
+                                    switch ($participant->getSex()) {
+                                        case "male":
+                                            echo "Homme";
+                                            break;
+                                        case "female":
+                                            echo "Femme";
+                                            break;
+                                    } ?>
+                            </td>
+                            <td><?= ($participant->getBib() ? $participant->getBib() : '')?></td>
+                            <td><?=($participant->getRuntime() ? $participant->getRuntime()->format("H:i:s") : '')?></td>
+                        </tr>
+                    <?php
+                    } ?>
+                <?php
+                } ?>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<?php } ?>
