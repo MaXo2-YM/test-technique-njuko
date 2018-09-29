@@ -2,6 +2,7 @@
 
 namespace Classement;
 
+use Classement\Controller\ClassementControllerFactory;
 use Zend\Router\Http\Literal;
 use Zend\Router\Http\Segment;
 use Zend\ServiceManager\Factory\InvokableFactory;
@@ -23,7 +24,7 @@ return [
     ],
     'controllers' => [
         'factories' => [
-            Controller\ClassementController::class => InvokableFactory::class,
+            Controller\ClassementController::class => ClassementControllerFactory::class,
         ],
     ],
     'view_manager' => [

@@ -7,11 +7,12 @@ use Zend\View\Model\ViewModel;
 
 class ClassementController extends AbstractActionController
 {
-    public function indexAction()
+    /** @var EntityManager $entityManager */
+    private $entityManager;
+
+    public function __construct($entityManager)
     {
-
-        /** TODO : Implementer les classements */
-
+        $this->entityManager = $entityManager;
         return new ViewModel();
     }
 }
