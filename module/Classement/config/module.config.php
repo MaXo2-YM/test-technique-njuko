@@ -24,7 +24,7 @@ return [
                     'event'   =>  array(
                         'type'    => Segment::class,
                         'options'   =>  array(
-                            'route' =>  '[/:event-id][/:sex]',
+                            'route' =>  '[/:event-id][/:sex][/:sort]',
                             'defaults'  =>  array(
                                 'controller' => Controller\ClassementController::class,
                                 'action'    =>  'event'

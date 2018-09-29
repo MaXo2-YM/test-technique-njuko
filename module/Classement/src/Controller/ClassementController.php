@@ -29,15 +29,22 @@ class ClassementController extends AbstractActionController
     public function eventAction()
     {
         $eventId = (int) $this->params()->fromRoute('event-id', 0);
-        $sex = $this->params()->fromRoute('sex', null);
+        $sex = $this->params()->fromRoute('sex', 'all');
+        $sort = $this->params()->fromRoute('sort', null);
         $event = $this->entityManager->getRepository('Application\Entity\Event')->find($eventId);
-        
+
         $search = ['event' => $event];
-        if($sex)
+        if($sex != "all")
         {
             $search['sex'] = $sex;
         }
-        $participants = $this->entityManager->getRepository('Application\Entity\Participant')->findBy($search);
+        if($sort)
+        {
+            $participants = $this->entityManager->getRepository('Application\Entity\Participant')->findBy($search,[$sort => 'asc']);
+        }
+        else {
+            $participants = $this->entityManager->getRepository('Application\Entity\Participant')->findBy($search);
+        }
 
         return new ViewModel(
             array(

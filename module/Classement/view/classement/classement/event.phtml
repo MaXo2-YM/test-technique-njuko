@@ -7,8 +7,8 @@
 <div class="row mt-20">
     <div class="col-md-12 text-center">
         Classement :
-        <?php if ($this->sex) { ?>
-            <a href="<?= $this->url('classement/event', ['event-id' => $this->event->getId(), 'sex' => null]) ?>">Général</a>
+        <?php if ($this->sex != "all") { ?>
+            <a href="<?= $this->url('classement/event', ['event-id' => $this->event->getId(), 'sex' => 'all']) ?>">Général</a>
         <?php } else { ?>
             <b>Général</b>
         <?php } ?> |
@@ -27,12 +27,12 @@
         <table class="table">
             <thead>
                 <tr>
-                    <td>#</td>
-                    <td>Nom</td>
-                    <td>Prénom</td>
-                    <td>Sexe</td>
-                    <td>Dossard</td>
-                    <td>Temps de course</td>
+                    <td><a href="<?= $this->url('classement/event', ['event-id' => $this->event->getId(), 'sex' => $this->sex, 'sort' => 'id']) ?>">#</a></td>
+                    <td><a href="<?= $this->url('classement/event', ['event-id' => $this->event->getId(), 'sex' => $this->sex, 'sort' => 'lastname']) ?>">Nom</a></td>
+                    <td><a href="<?= $this->url('classement/event', ['event-id' => $this->event->getId(), 'sex' => $this->sex, 'sort' => 'firstname']) ?>">Prénom</a></td>
+                    <td><a href="<?= $this->url('classement/event', ['event-id' => $this->event->getId(), 'sex' => $this->sex, 'sort' => 'sex']) ?>">Sexe</a></td>
+                    <td><a href="<?= $this->url('classement/event', ['event-id' => $this->event->getId(), 'sex' => $this->sex, 'sort' => 'bib']) ?>">Dossard</a></td>
+                    <td><a href="<?= $this->url('classement/event', ['event-id' => $this->event->getId(), 'sex' => $this->sex, 'sort' => 'runtime']) ?>">Temps de Course</a></td>
                 </tr>
             </thead>
             <tbody>
